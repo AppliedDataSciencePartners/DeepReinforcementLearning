@@ -4,28 +4,27 @@ import logging
 class Game:
 
 	def __init__(self):		
-		self.playerTurn = 1
+		self.currentPlayer = 1
 		self.gameState = GameState(np.array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], dtype=np.int), 1)
 		self.actionSpace = np.array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], dtype=np.int)
 		self.pieces = {'1':'X', '0': '-', '-1':'O'}
 		self.grid_shape = (5,5)
-		self.name = 'metaSquares5'
+		self.input_shape = (2,5,5)
+		self.name = 'metaSquares'
+		self.state_size = len(self.gameState.binary)
+		self.action_size = len(self.actionSpace)
 
 	def reset(self):
 		self.gameState = GameState(np.array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], dtype=np.int), 1)
-		self.playerTurn = 1
+		self.currentPlayer = 1
 		return self.gameState
 
 	def step(self, action):
 		next_state, value, done = self.gameState.takeAction(action)
 		self.gameState = next_state
+		self.currentPlayer = -self.currentPlayer
 		info = None
 		return ((next_state, value, done, info))
-
-	def render(self, logger):
-		for r in range(5):
-			logger.info([self.pieces[str(x)] for x in self.gameState.board[5*r : (5*r + 5)]])
-		logger.info('--------------')
 
 	def identities(self, state, actionValues):
 		identities = []
@@ -91,9 +90,13 @@ class Game:
 
 		return identities
 
+
+
+
 class GameState():
 	def __init__(self, board, playerTurn):
 		self.board = board
+		self.pieces = {'1':'X', '0': '-', '-1':'O'}
 		self.winners = [
 			{'points': 1, 'tiles' : [
 			[0,1,5,6]
@@ -163,42 +166,50 @@ class GameState():
 			]},
 			]
 		self.playerTurn = playerTurn
+		self.binary = self._binary()
+		self.id = self._convertStateToId()
+		self.allowedActions = self._allowedActions()
+		self.isEndGame = self._checkForEndGame()
+		self.value = self._getValue()
+		self.score = self._getScore()
 
-	def allowedActions(self):
+	def _allowedActions(self):
 		return np.where(self.board == 0)[0]
 
-	def binary(self):
+	def _binary(self):
 
-		white_position = np.zeros(len(self.board), dtype=np.int)
-		white_position[self.board==1] = 1
+		currentplayer_position = np.zeros(len(self.board), dtype=np.int)
+		currentplayer_position[self.board==self.playerTurn] = 1
 
-		black_position = np.zeros(len(self.board), dtype=np.int)
-		black_position[self.board==-1] = 1
+		other_position = np.zeros(len(self.board), dtype=np.int)
+		other_position[self.board==-self.playerTurn] = 1
 
-		position = np.append(white_position,black_position)
+		position = np.append(currentplayer_position,other_position)
 
 		return (position)
 
-	def takeAction(self, action):
-		newBoard = np.array(self.board)
-		newBoard[action] = self.playerTurn
-		newState = GameState(newBoard, -self.playerTurn)
+	def _convertStateToId(self):
+		player1_position = np.zeros(len(self.board), dtype=np.int)
+		player1_position[self.board==1] = 1
 
-		value = 0
-		done = 0
+		other_position = np.zeros(len(self.board), dtype=np.int)
+		other_position[self.board==-1] = 1
 
-		if newState.checkForEndGame():
-			value = newState.getValue()[0]
-			done = 1
+		position = np.append(player1_position,other_position)
 
-		return (newState, value, done) 
+		id = ''.join(map(str,position))
 
-	def checkForEndGame(self):
+		return id
+
+
+
+
+	def _checkForEndGame(self):
 		if np.count_nonzero(self.board) == 24:
 			return 1
 		return 0
 
-	def getValue(self):
+	def _getValue(self):
 		currentPlayerPoints = 0
 		for squareType in self.winners:
 			points = squareType['points']
@@ -232,13 +243,29 @@ class GameState():
 		else:
 			return (0, currentPlayerPoints, opponentPlayerPoints)
 
-	def convertStateToId(self):
-		id = ''.join(map(str,self.binary()))
-		return id
 
-	def getScore(self):
-		tmp = self.getValue()
+	def _getScore(self):
+		tmp = self.value
 		return (tmp[1], tmp[2])
+
+	def takeAction(self, action):
+		newBoard = np.array(self.board)
+		newBoard[action] = self.playerTurn
+		newState = GameState(newBoard, -self.playerTurn)
+
+		value = 0
+		done = 0
+
+		if newState.isEndGame:
+			value = newState.value[0]
+			done = 1
+
+		return (newState, value, done) 
+
+	def render(self, logger):
+		for r in range(5):
+			logger.info([self.pieces[str(x)] for x in self.board[5*r : (5*r + 5)]])
+		logger.info('--------------')
 
 
 
