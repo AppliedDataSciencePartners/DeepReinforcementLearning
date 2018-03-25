@@ -186,7 +186,7 @@ class Agent():
 		lg.logger_mcts.info('******RETRAINING MODEL******')
 
 
-		for i in xrange(config.TRAINING_LOOPS):
+		for i in range(config.TRAINING_LOOPS):
 			minibatch = random.sample(ltmemory, min(config.BATCH_SIZE, len(ltmemory)))
 
 			training_states = np.array([self.model.convertToModelInput(row['state']) for row in minibatch])

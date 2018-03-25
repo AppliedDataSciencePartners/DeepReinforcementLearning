@@ -80,7 +80,7 @@ class Gen_Model():
 	
 				try:
 					fig = plt.figure(figsize=(3, len(x)))  # width, height in inches
-					for i in xrange(len(x)):
+					for i in range(len(x)):
 						sub = fig.add_subplot(len(x), 1, i + 1)
 						if i == 0:
 							clim = (0,2)

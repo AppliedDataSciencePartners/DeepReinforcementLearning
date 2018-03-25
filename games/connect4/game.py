@@ -143,7 +143,7 @@ class GameState():
 
 	def _allowedActions(self):
 		allowed = []
-		for i in xrange(len(self.board)):
+		for i in range(len(self.board)):
 			if i >= len(self.board) - 7:
 				if self.board[i]==0:
 					allowed.append(i)

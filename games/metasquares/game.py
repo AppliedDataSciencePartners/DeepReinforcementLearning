@@ -31,7 +31,7 @@ class Game:
 		currentBoard = state.board
 		currentAV = actionValues
 
-		for n in xrange(5):
+		for n in range(5):
 			currentBoard = np.array([
 						  currentBoard[20], currentBoard[15],currentBoard[10], currentBoard[5],currentBoard[0]
 						, currentBoard[21], currentBoard[16],currentBoard[11], currentBoard[6],currentBoard[1]
@@ -68,7 +68,7 @@ class Game:
 
 					])
 
-		for n in xrange(5):
+		for n in range(5):
 			currentBoard = np.array([
 						  currentBoard[20], currentBoard[15],currentBoard[10], currentBoard[5],currentBoard[0]
 						, currentBoard[21], currentBoard[16],currentBoard[11], currentBoard[6],currentBoard[1]

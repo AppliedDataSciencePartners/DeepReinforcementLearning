@@ -143,7 +143,7 @@ class GameState():
 
 	def _allowedActions(self):
 		allowed = []
-		for i in xrange(len(self.board)):
+		for i in range(len(self.board)):
 			if i >= len(self.board) - 7:
 				if self.board[i]==0:
 					allowed.append(i)
@@ -226,6 +226,3 @@ class GameState():
 		for r in range(6):
 			logger.info([self.pieces[str(x)] for x in self.board[7*r : (7*r + 7)]])
 		logger.info('--------------')
-
-
-
