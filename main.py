@@ -15,7 +15,7 @@ from game import Game, GameState
 from agent import Agent
 from memory import Memory
 from model import Residual_CNN
-from funcs import playMatches
+from funcs import playMatches, playMatchesBetweenVersions
 
 import loggers as lg
 
@@ -101,7 +101,7 @@ while 1:
         print('')
 
         if iteration % 5 == 0:
-            pickle.dump( memory, open( run_folder + "memory/memory" + iteration + ".p", "wb" ) )
+            pickle.dump( memory, open( run_folder + "memory/memory" + str(iteration).zfill(4) + ".p", "wb" ) )
 
         lg.logger_memory.info('====================')
         lg.logger_memory.info('NEW MEMORIES')
