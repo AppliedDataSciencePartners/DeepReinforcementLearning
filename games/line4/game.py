@@ -88,7 +88,7 @@ class GameState():
 
 
     def _convert(x, y, z):
-        return x + 4 * y + 16 * z
+        return x + 4*y + 16*z
 
     def _set_winners(self):
         _convert = self._convert
