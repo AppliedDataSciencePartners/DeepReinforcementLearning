@@ -118,7 +118,7 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
                 if value == 1:
                     logger.info('%s WINS!', players[state.playerTurn]['name'])
                     scores[players[state.playerTurn]['name']] = scores[players[state.playerTurn]['name']] + 1
-                    if state.playerTurn == 1: 
+                    if state.playerTurn == 1:
                         sp_scores['sp'] = sp_scores['sp'] + 1
                     else:
                         sp_scores['nsp'] = sp_scores['nsp'] + 1
@@ -127,7 +127,7 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
                     logger.info('%s WINS!', players[-state.playerTurn]['name'])
                     scores[players[-state.playerTurn]['name']] = scores[players[-state.playerTurn]['name']] + 1
 
-                    if state.playerTurn == 1: 
+                    if state.playerTurn == 1:
                         sp_scores['nsp'] = sp_scores['nsp'] + 1
                     else:
                         sp_scores['sp'] = sp_scores['sp'] + 1
@@ -141,6 +141,6 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
                 points[players[state.playerTurn]['name']].append(pts[0])
                 points[players[-state.playerTurn]['name']].append(pts[1])
 
-    logger.info('score: ' + scores)
+    logger.info('score: ' + str(scores))
 
     return (scores, memory, points, sp_scores)
