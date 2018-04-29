@@ -110,3 +110,5 @@ games/archive/
 *.pyc
 *.swp
 run/
+initialise.py
+.DS_Store
