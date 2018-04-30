@@ -11,7 +11,14 @@ from importlib import reload
 
 from keras.utils import plot_model
 
+import initialise
+
+# If learning another game, copy the game file to root
+if initialise.GAME_NAME != None:
+    copyfile('./games/' + initialise.GAME_NAME + '/game.py', './game.py')
+
 from game import Game, GameState
+
 from agent import Agent
 from memory import Memory
 from model import Residual_CNN
@@ -20,7 +27,6 @@ from funcs import playMatches, playMatchesBetweenVersions
 import loggers as lg
 
 from settings import run_folder, run_archive_folder
-import initialise
 import pickle
 
 
@@ -35,6 +41,7 @@ if initialise.INITIAL_RUN_NUMBER != None:
     copyfile(run_archive_folder  + env.name + '/run' + str(initialise.INITIAL_RUN_NUMBER).zfill(4) + '/config.py', './config.py')
 
 import config
+
 
 ######## LOAD MEMORIES IF NECESSARY ########
 
