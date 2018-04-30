@@ -14,7 +14,7 @@ from keras.utils import plot_model
 import initialise
 
 # If learning another game, copy the game file to root
-if initialise.GAME_NAME != None:
+if initialise.INITIAL_GAME_NAME != None:
     copyfile('./games/' + initialise.GAME_NAME + '/game.py', './game.py')
 
 from game import Game, GameState
