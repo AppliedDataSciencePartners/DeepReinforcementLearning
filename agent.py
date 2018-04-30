@@ -209,10 +209,10 @@ class Agent():
 
         plt.savefig(run_folder + '/loss/graph.png')
 
-        display.clear_output(wait=True)
-        display.display(pl.gcf())
-        pl.gcf().clear()
-        time.sleep(1.0)
+        # display.clear_output(wait=True)
+        # display.display(pl.gcf())
+        # pl.gcf().clear()
+        # time.sleep(1.0)
 
         print('\n')
         self.model.printWeightAverages()
