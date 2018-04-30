@@ -1,15 +1,14 @@
 import numpy as np
 
 AXIS = [0, 1, 2, 3]
-def _convert(x, y, z):
-    return x + 4*y + 16*z
-
 _identities = []
 _identities.append([_convert(x,y,z) for x in AXIS for y in AXIS for z in AXIS])
 _identities.append([_convert(x,y,z) for x in AXIS for y in AXIS[::-1] for z in AXIS])
 _identities.append([_convert(x,y,z) for x in AXIS[::-1] for y in AXIS for z in AXIS])
 _identities.append([_convert(x,y,z) for x in AXIS[::-1] for y in AXIS[::-1] for z in AXIS])
 
+def _convert(self, x, y, z):
+    return x + 4*y + 16*z
 
 class Game:
 

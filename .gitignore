@@ -108,3 +108,8 @@ run_archive/
 code_archive/
 games/archive/
 *.pyc
+*.swp
+run/
+initialise.py
+.DS_Store
+config.py

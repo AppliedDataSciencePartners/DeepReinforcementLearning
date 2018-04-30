@@ -1,4 +1,3 @@
-
 from utils import setup_logger
 from settings import run_folder
 
@@ -27,4 +26,4 @@ logger_memory.disabled = LOGGER_DISABLED['memory']
 
 logger_model = setup_logger('logger_model', run_folder + 'logs/logger_model.log')
 logger_model.disabled = LOGGER_DISABLED['model']
- 
+
