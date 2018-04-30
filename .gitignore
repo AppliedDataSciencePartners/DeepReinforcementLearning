@@ -112,3 +112,4 @@ games/archive/
 run/
 initialise.py
 .DS_Store
+config.py
