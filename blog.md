@@ -2,7 +2,9 @@
 ## Something Wrong with Stockfish
 In chess, some of the most legendary moves have been sacrifices. The Grandmasters would sacrifice their pieces to end up winning a game. Usually these sacrifices leaves these grandmasters down in material but up in a more favorable position (You don’t have as powerful of chess pieces, however the pieces that you do have are going to be a lot more active). These grandmasters would exploit the advantage and end up winning the game. However, many of the top chess programs such as stockfish would comment that these moves were not optimal. While stockfish is great at trying to maximize the material value, the evaluation function is designed by humans, which means that the way that it evaluates is limited by how well a human can evaluate a position. This leads for opportunities for exploitation.
  This fact became apparent when the two programs played and alphazero pushed Stockfish into a corner limiting it’s moves. However, stockfish is thoroughly unaware that it is in any danger.
+
 ![alt text]( https://github.com/supersteph/DeepReinforcementLearning/blob/master/images/Screenshot%20from%202018-04-25%2023-33-10.png "Logo Title Text 2")
+
 Alpha zero (white) traps the knight and rook and effectively renders Stockfish’s (black) pieces useless
 
 
