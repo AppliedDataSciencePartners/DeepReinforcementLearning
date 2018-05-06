@@ -22,7 +22,7 @@ We are going to choose our moves based on how big this value is higher. Q is goi
 (this is a derivation of the multi-armed bandit problem)
 '''python
 
-			for idx, (action, edge) in enumerate(currentNode.edges):
+for idx, (action, edge) in enumerate(currentNode.edges):
 
 
 
@@ -32,49 +32,49 @@ We are going to choose our moves based on how big this value is higher. Q is goi
 
 
 
-				U = self.cpuct * \
+	U = self.cpuct * \
 
 
-					((1-epsilon) * edge.stats['P'] + epsilon * nu[idx] )  * \
+		((1-epsilon) * edge.stats['P'] + epsilon * nu[idx] )  * \
 
 
-					np.sqrt(Nb) / (1 + edge.stats['N'])
+		np.sqrt(Nb) / (1 + edge.stats['N'])
 
 
-					
+		
 
 
-				Q = edge.stats['Q']
+	Q = edge.stats['Q']
 
 
 
 //U is going to be a function derived from p which is the probability of currently taking this action and N which is the number of times that this is explored.
 
 
-				lg.logger_mcts.info('action: %d (%d)... N = %d, P = %f, nu = %f, adjP = %f, W = %f, Q = %f, U = %f, Q+U = %f'
+	lg.logger_mcts.info('action: %d (%d)... N = %d, P = %f, nu = %f, adjP = %f, W = %f, Q = %f, U = %f, Q+U = %f'
 
 
-					, action, action % 7, edge.stats['N'], np.round(edge.stats['P'],6), np.round(nu[idx],6), ((1-epsilon) * edge.stats['P'] + epsilon * nu[idx] )
+		, action, action % 7, edge.stats['N'], np.round(edge.stats['P'],6), np.round(nu[idx],6), ((1-epsilon) * edge.stats['P'] + epsilon * nu[idx] )
 
 
-					, np.round(edge.stats['W'],6), np.round(Q,6), np.round(U,6), np.round(Q+U,6))
-
-
-
+		, np.round(edge.stats['W'],6), np.round(Q,6), np.round(U,6), np.round(Q+U,6))
 
 
 
 
-				if Q + U > maxQU:
 
 
-					maxQU = Q + U
+
+	if Q + U > maxQU:
 
 
-					simulationAction = action
+		maxQU = Q + U
 
 
-					simulationEdge = edge
+		simulationAction = action
+
+
+		simulationEdge = edge
 '''
 Finds the biggest q+u
 
@@ -104,26 +104,26 @@ If there is a node that is there before then you add a new edge that returns to 
 
 You use the backfill to get the data you got from the bottom to the top. The intuition being that the moves you made at the very beginning affected the outcome of the game. Based on if you won the game or lost the neural net is going to have a better idea of what to do in the future. For every action you use a backfill process that notes the following things. The number of times you’ve been at each node (which is going to include it’s children), the mean value of the state and the value.
 '''python
-		for edge in breadcrumbs:
-			playerTurn = edge.playerTurn
-			if playerTurn == currentPlayer:
-				direction = 1
-			else:
-				direction = -1
+for edge in breadcrumbs:
+	playerTurn = edge.playerTurn
+	if playerTurn == currentPlayer:
+		direction = 1
+	else:
+		direction = -1
 
-			edge.stats['N'] = edge.stats['N'] + 1
-			edge.stats['W'] = edge.stats['W'] + value * direction
-			edge.stats['Q'] = edge.stats['W'] / edge.stats['N']
+	edge.stats['N'] = edge.stats['N'] + 1
+	edge.stats['W'] = edge.stats['W'] + value * direction
+	edge.stats['Q'] = edge.stats['W'] / edge.stats['N']
 
-			lg.logger_mcts.info('updating edge with value %f for player %d... N = %d, W = %f, Q = %f'
-				, value * direction
-				, playerTurn
-				, edge.stats['N']
-				, edge.stats['W']
-				, edge.stats['Q']
-				)
+	lg.logger_mcts.info('updating edge with value %f for player %d... N = %d, W = %f, Q = %f'
+		, value * direction
+		, playerTurn
+		, edge.stats['N']
+		, edge.stats['W']
+		, edge.stats['Q']
+		)
 
-			edge.outNode.state.render(lg.logger_mcts)
+	edge.outNode.state.render(lg.logger_mcts)
 
 '''
 By having two agents running this mcts algorithm and having them playing against each other. If one of them beats each other more than 55% of the time they are declared as the best player. This best player is going to be used for evaluating how good the network is.
