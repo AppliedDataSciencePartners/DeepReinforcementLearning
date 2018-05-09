@@ -22,15 +22,15 @@ While Stockfish makes errors when in an effort to reduce the search space, the s
 Q+U
 We are going to choose our moves based on how big this value is higher. Q is going to be the mean reward for the state and U is how “unknown” this action is. In the beginning, when not much is going to be known about the values of the states, exploration is going to be preferred: so U is set up to have a higher value. However, as time progresses, we understand more about the value of the states through our neural net. In this instance, the winning of the game is more important so we set U to become smaller so that the algorithm makes the best moves.
 (this is a derivation of the multi-armed bandit problem)
-'''python
-
-for idx, (action, edge) in enumerate(currentNode.edges):
 
 
+```python
 
 
 
 
+
+for idx, (action, edge) in enumerate(currentNode):
 
 
 
@@ -50,17 +50,14 @@ for idx, (action, edge) in enumerate(currentNode.edges):
 
 
 
-//U is going to be a function derived from p which is the probability of currently taking this action and N which is the number of times that this is explored.
 
-
-	lg.logger_mcts.info('action: %d (%d)... N = %d, P = %f, nu = %f, adjP = %f, W = %f, Q = %f, U = %f, Q+U = %f'
+    lg.logger_mcts.info('action: %d (%d)... N = %d, P = %f, nu = %f, adjP = %f, W = %f, Q = %f, U = %f, Q+U = %f'
 
 
 		, action, action % 7, edge.stats['N'], np.round(edge.stats['P'],6), np.round(nu[idx],6), ((1-epsilon) * edge.stats['P'] + epsilon * nu[idx] )
 
 
 		, np.round(edge.stats['W'],6), np.round(Q,6), np.round(U,6), np.round(Q+U,6))
-
 
 
 
@@ -77,15 +74,16 @@ for idx, (action, edge) in enumerate(currentNode.edges):
 
 
 		simulationEdge = edge
-'''
-
+```
 
 Finds the biggest q+u
 
 
 After you have chosen a move, execute that move to get to a node and proceed to the evaluation phase.
 The board is evaluated by a neural net employing convolutions. The Model is going to take in the game state and return the probability of the actions that you should take, and the value at the current state.
-'''python
+
+
+```python
 value, probs, allowedActions = self.get_preds(leaf.state)
 Get the value and the probability function
 
@@ -102,12 +100,14 @@ for idx, action in enumerate(allowedActions):
 
 				newEdge = mc.Edge(leaf, node, probs[idx], action)
 				leaf.edges.append((action, newEdge))
-'''
+```
+
 (execute the neural net and add the possible nodes the the game tree)
 If there is a node that is there before then you add a new edge that returns to the node otherwise you add it to the tree
 
 You use the backfill to get the data you got from the bottom to the top. The intuition being that the moves you made at the very beginning affected the outcome of the game. Based on if you won the game or lost the neural net is going to have a better idea of what to do in the future. For every action you use a backfill process that notes the following things. The number of times you’ve been at each node (which is going to include it’s children), the mean value of the state and the value.
-'''python
+
+```python
 for edge in breadcrumbs:
 	playerTurn = edge.playerTurn
 	if playerTurn == currentPlayer:
@@ -129,5 +129,6 @@ for edge in breadcrumbs:
 
 	edge.outNode.state.render(lg.logger_mcts)
 
-'''
+```
+
 By having two agents running this mcts algorithm and having them playing against each other. If one of them beats each other more than 55% of the time they are declared as the best player. This best player is going to be used for evaluating how good the network is.
