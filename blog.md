@@ -22,7 +22,7 @@ While Stockfish makes errors when in an effort to reduce the search space, the s
 Q+U
 We are going to choose our moves based on how big this value is higher. Q is going to be the mean reward for the state and U is how “unknown” this action is. In the beginning, when not much is going to be known about the values of the states, exploration is going to be preferred: so U is set up to have a higher value. However, as time progresses, we understand more about the value of the states through our neural net. In this instance, the winning of the game is more important so we set U to become smaller so that the algorithm makes the best moves.
 (this is a derivation of the multi-armed bandit problem)
-'''python
+''' python
 
 for idx, (action, edge) in enumerate(currentNode.edges):
 
@@ -78,6 +78,8 @@ for idx, (action, edge) in enumerate(currentNode.edges):
 
 		simulationEdge = edge
 '''
+
+
 Finds the biggest q+u
 
 
@@ -105,7 +107,7 @@ for idx, action in enumerate(allowedActions):
 If there is a node that is there before then you add a new edge that returns to the node otherwise you add it to the tree
 
 You use the backfill to get the data you got from the bottom to the top. The intuition being that the moves you made at the very beginning affected the outcome of the game. Based on if you won the game or lost the neural net is going to have a better idea of what to do in the future. For every action you use a backfill process that notes the following things. The number of times you’ve been at each node (which is going to include it’s children), the mean value of the state and the value.
-'''python
+''' python
 for edge in breadcrumbs:
 	playerTurn = edge.playerTurn
 	if playerTurn == currentPlayer:
