@@ -110,7 +110,7 @@ By having two agents running this mcts algorithm and having them playing against
 <br>
 
 
-<p>: <script language="JavaScript">
+<script language="JavaScript">
 var x = "krestik.gif";
 var o = "nolik.gif";
 var blank = "blank.jpg";
