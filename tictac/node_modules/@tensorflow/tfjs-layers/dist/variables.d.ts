@@ -1,0 +1,31 @@
+import * as tfc from '@tensorflow/tfjs-core';
+import { DataType, Tensor } from '@tensorflow/tfjs-core';
+import { Constraint } from './constraints';
+import { Shape } from './types';
+export declare class LayerVariable {
+    readonly dtype: DataType;
+    readonly shape: Shape;
+    readonly id: number;
+    readonly name: string;
+    readonly originalName: string;
+    readonly trainable: boolean;
+    protected readonly val: tfc.Variable;
+    readonly constraint: Constraint;
+    constructor(val: Tensor, dtype?: DataType, name?: string, trainable?: boolean, constraint?: Constraint);
+    read(): Tensor;
+    write(newVal: Tensor): this;
+}
+export declare function variable(x: Tensor, dtype?: DataType, name?: string, constraint?: Constraint): LayerVariable;
+export declare function zerosVariable(shape: Shape, dtype?: DataType, name?: string): LayerVariable;
+export declare function zerosLike(x: Tensor, dtype?: DataType, name?: string): LayerVariable;
+export declare function onesVariable(shape: Shape, dtype?: DataType, name?: string): LayerVariable;
+export declare function onesLike(x: Tensor, dtype?: DataType, name?: string): LayerVariable;
+export declare function eyeVariable(size: number, dtype?: DataType, name?: string): LayerVariable;
+export declare function randomUniformVariable(shape: Shape, minval: number, maxval: number, dtype?: DataType, seed?: number, name?: string): LayerVariable;
+export declare function truncatedNormalVariable(shape: Shape, mean?: number, stddev?: number, dtype?: DataType, seed?: number, name?: string): LayerVariable;
+export declare function randomNormalVariable(shape: Shape, mean?: number, stddev?: number, dtype?: DataType, seed?: number, name?: string): LayerVariable;
+export declare function update(x: LayerVariable, xNew: Tensor): LayerVariable;
+export declare function updateAdd(x: LayerVariable, increment: Tensor): LayerVariable;
+export declare function updateSub(x: LayerVariable, decrement: Tensor): LayerVariable;
+export declare function batchGetValue(xs: LayerVariable[]): Tensor[];
+export declare function batchSetValue(variablesAndValues: Array<[LayerVariable, Tensor]>): void;

@@ -1,0 +1,21 @@
+{
+    "name": "@types/long",
+    "version": "3.0.32",
+    "description": "TypeScript definitions for long.js",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Peter Kooijmans",
+            "url": "https://github.com/peterkooijmans"
+        }
+    ],
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "26c346715f4bbe747a7eddec4134408618814ef4340646fcbac955fcdb491a4c",
+    "typeScriptVersion": "2.0"
+}
