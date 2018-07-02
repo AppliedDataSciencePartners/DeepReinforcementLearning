@@ -1,11 +1,11 @@
 import * as tf from '@tensorflow/tfjs';
 
-//const model = await tf.loadModel('https://foo.bar/tfjs_artifacts/model.json');
+console.log("HELLO I AM HERE");
 
-
-var x = "krestik.gif";
-var o = "nolik.gif";
-var blank = "blank.jpg";
+const model = tf.loadModel('tfjs/model.json');  
+var x = "/krestik.gif";
+var o = "/nolik.gif";
+var blank = "/blank.jpg";
 var pause = 0;
 var all = 0;
 var a = 0;
@@ -245,3 +245,23 @@ function reset() {
 }
 var ie4 = (document.all) ? true : false;
 var nn4 = (document.layers) ? true : false;
+
+document.getElementById("A").onclick = function() {yourChoice('A')};
+document.getElementById("B").onclick = function() {yourChoice('B')};
+document.getElementById("C").onclick = function() {yourChoice('C')};
+document.getElementById("D").onclick = function() {yourChoice('D')};
+document.getElementById("E").onclick = function() {yourChoice('E')};
+document.getElementById("F").onclick = function() {yourChoice('F')};
+document.getElementById("G").onclick = function() {yourChoice('G')};
+document.getElementById("H").onclick = function() {yourChoice('H')};
+document.getElementById("I").onclick = function() {yourChoice('I')};
+document.getElementById("button").onclick = function() {playAgain()};
+
+// async function setupMnistTransferCNN() {
+//   const button = document.getElementById('load-pretrained-remote');
+//   button.addEventListener('click', async () => {
+//       yourChoice('A')
+//   });
+// }
+
+// setupMnistTransferCNN();
