@@ -90,7 +90,7 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
                 ####Commit the move to memory
                 memory.commit_stmemory(env.identities, state, pi)
 
-
+            print("hello from the middle of the stuff")
             # logger.info('action: %d', action)
             # for r in range(env.grid_shape[0]):
             #     logger.info(['----' if x == 0 else '{0:.2f}'.format(np.round(x,2)) for x in pi[env.grid_shape[1]*r : (env.grid_shape[1]*r + env.grid_shape[1])]])
