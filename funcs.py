@@ -86,9 +86,9 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
             else:
                 action, pi, MCTS_value, NN_value = players[state.playerTurn]['agent'].act(state, 0)
             print(MCTS_value)
-            if memory != None:
-                ####Commit the move to memory
-                memory.commit_stmemory(env.identities, state, pi)
+            # if memory != None:
+            #     ####Commit the move to memory
+            #     memory.commit_stmemory(env.identities, state, pi)
 
             print("hello from the middle of the stuff")
             # logger.info('action: %d', action)
