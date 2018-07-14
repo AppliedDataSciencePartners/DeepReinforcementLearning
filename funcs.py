@@ -39,14 +39,14 @@ def playMatchesBetweenVersions(env, run_version, player1version, player2version,
 
 
 def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = None, goes_first = 0):
-
+    print("hello from the playMatches")
     env = Game()
     scores = {player1.name:0, "drawn": 0, player2.name:0}
     sp_scores = {'sp':0, "drawn": 0, 'nsp':0}
     points = {player1.name:[], player2.name:[]}
-
+    print("hello from the begenning of for loop")
     for e in range(EPISODES):
-
+        print("hello from the for loop")
         logger.info('====================')
         logger.info('EPISODE %d OF %d', e+1, EPISODES)
         logger.info('====================')
@@ -80,6 +80,7 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
         env.gameState.render(logger)
 
         while done == 0:
+            print("hello from the while loop")
             turn = turn + 1
     
             #### Run the MCTS algo and return an action
