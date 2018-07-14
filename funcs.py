@@ -39,14 +39,11 @@ def playMatchesBetweenVersions(env, run_version, player1version, player2version,
 
 
 def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = None, goes_first = 0):
-    print("hello from the playMatches")
     env = Game()
     scores = {player1.name:0, "drawn": 0, player2.name:0}
     sp_scores = {'sp':0, "drawn": 0, 'nsp':0}
     points = {player1.name:[], player2.name:[]}
-    print("hello from the begenning of for loop")
     for e in range(EPISODES):
-        print("hello from the for loop")
         logger.info('====================')
         logger.info('EPISODE %d OF %d', e+1, EPISODES)
         logger.info('====================')
@@ -106,6 +103,7 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
             
             env.gameState.render(logger)
 
+            print("hello from the beggening of ifs")
             if done == 1: 
                 if memory != None:
                     #### If the game is finished, assign the values correctly to the game moves
@@ -142,5 +140,5 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
                 pts = state.score
                 points[players[state.playerTurn]['name']].append(pts[0])
                 points[players[-state.playerTurn]['name']].append(pts[1])
-
+    print("hello?")
     return (scores, memory, points, sp_scores)
