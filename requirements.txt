@@ -32,7 +32,7 @@ Pygments==2.2.0
 pyparsing==2.2.0
 python-dateutil==2.7.1
 pytz==2018.3
-PyYAML==3.12
+PyYAML==5.1
 pyzmq==17.0.0
 scipy==1.0.1
 simplegeneric==0.8.1
