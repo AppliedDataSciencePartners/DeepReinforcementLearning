@@ -1,5 +1,5 @@
 #### SELF PLAY
-EPISODES = 30
+EPISODES = 1
 MCTS_SIMS = 50
 MEMORY_SIZE = 30000
 TURNS_UNTIL_TAU0 = 10 # turn on which it starts playing deterministically

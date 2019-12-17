@@ -23,7 +23,8 @@ class User():
 		self.action_size = action_size
 
 	def act(self, state, tau):
-		action = input('Enter your chosen action: ')
+		print(tau)
+		action = int(input('Enter your chosen action: '))
 		pi = np.zeros(self.action_size)
 		pi[action] = 1
 		value = None
@@ -90,6 +91,8 @@ class Agent():
 
 		####pick the action
 		action, value = self.chooseAction(pi, values, tau)
+
+		print("action:"+str(action))
 
 		nextState, _, _ = state.takeAction(action)
 
