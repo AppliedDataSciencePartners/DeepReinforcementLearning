@@ -43,4 +43,4 @@ termcolor==1.1.0
 tornado==5.0.1
 traitlets==4.3.2
 wcwidth==0.1.7
-Werkzeug==0.14.1
+Werkzeug==0.15.3
