@@ -38,7 +38,7 @@ scipy==1.0.1
 simplegeneric==0.8.1
 six==1.11.0
 tensorboard==1.6.0
-tensorflow==1.6.0
+tensorflow==1.15.4
 termcolor==1.1.0
 tornado==5.0.1
 traitlets==4.3.2
