@@ -24,7 +24,7 @@ parso==0.1.1
 pexpect==4.4.0
 pickleshare==0.7.4
 prompt-toolkit==1.0.15
-protobuf==3.5.2.post1
+protobuf==3.18.3
 ptyprocess==0.5.2
 pydot==1.2.4
 pydot-ng==1.0.0
